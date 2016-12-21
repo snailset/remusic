@@ -87,7 +87,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
     private SeekBar mProgress;
 
     private ActionBar ab;
-    private ObjectAnimator needleAnim, animator;
+    private ObjectAnimator needleAnim, animator;  //前者磁头动画，后者图片动画 todo图片动画还没看
     private AnimatorSet animatorSet;
     private AlbumViewPager mViewPager;
     private FragmentAdapter fAdapter;
@@ -164,6 +164,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
         // setViewPager();
     }
 
+    //--
     private void initLrcView() {
         mLrcView.setOnSeekToListener(onSeekToListener);
         mLrcView.setOnLrcClickListener(onLrcClickListener);
@@ -198,6 +199,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
     }
 
 
+    //--
     LrcView.OnLrcClickListener onLrcClickListener = new LrcView.OnLrcClickListener() {
 
         @Override
@@ -210,6 +212,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
             }
         }
     };
+    //--
     LrcView.OnSeekToListener onSeekToListener = new LrcView.OnSeekToListener() {
 
         @Override
@@ -263,6 +266,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
     };
 
 
+    //--
     private void loadOther() {
         new Thread(new Runnable() {
             @Override
@@ -279,12 +283,13 @@ public class PlayingActivity extends BaseActivity implements IConstants {
 
     }
 
+    //--
     private void setViewPager() {
 
         PlaybarPagerTransformer transformer = new PlaybarPagerTransformer();
         fAdapter = new FragmentAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(fAdapter);
-        mViewPager.setPageTransformer(true, transformer);
+        mViewPager.setPageTransformer(true, transformer); // TODO: 2016/12/7
 
         //改变viewpager动画时间
 //        try {
@@ -355,6 +360,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
         });
     }
 
+    //--
     private void setTools() {
         playingmode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -465,6 +471,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
 
     }
 
+    //--
     private void updatePlaymode() {
         if (MusicPlayer.getShuffleMode() == MediaService.SHUFFLE_NORMAL) {
             playingmode.setImageResource(R.drawable.play_icn_shuffle);
@@ -511,6 +518,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
         mViewPager.setCurrentItem(MusicPlayer.getQueuePosition() + 1, false);
     }
 
+    //--
     private void updateFav(boolean b) {
         if (b == true) {
             fav.setImageResource(R.drawable.play_icn_loved);
@@ -519,6 +527,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
         }
     }
 
+    //--
     private void updateLrc() {
         if (getLrcRows() != null && getLrcRows().size() > 0) {
             tryGetLrc.setVisibility(View.INVISIBLE);
@@ -619,6 +628,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
         //mProgress.setMax((int) MusicPlayer.duration());
     }
 
+    // TODO: 2016/12/7 缓冲进度
     @Override
     public void updateBuffer(int p) {
         super.updateBuffer(p);
@@ -626,6 +636,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
 
     }
 
+    //--
     private Runnable mUpdateProgress = new Runnable() {
 
         @Override
@@ -645,6 +656,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
         }
     };
 
+    // --
     private void setSeekBarListener() {
 
         if (mProgress != null)
@@ -670,7 +682,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
                 }
             });
     }
-
+    //-
     private void stopAnim() {
         activeView = null;
 
@@ -720,9 +732,15 @@ public class PlayingActivity extends BaseActivity implements IConstants {
     }
 
 
+    // viewpager转场动画
     public class PlaybarPagerTransformer implements ViewPager.PageTransformer {
 
 
+        /**
+         *
+         * @param view
+         * @param position 0表示 当前view位于中间 1表示view位于右侧。-1表示view位于左侧
+         */
         @Override
         public void transformPage(View view, float position) {
 
@@ -765,6 +783,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
 
     Bitmap mBitmap;
 
+    // 设置模糊专辑封面
     private class setBlurredAlbumArt extends AsyncTask<Void, Void, Drawable> {
         long albumid = MusicPlayer.getCurrentAlbumId();
 
@@ -866,6 +885,7 @@ public class PlayingActivity extends BaseActivity implements IConstants {
 
     }
 
+    //--
     private void setDrawable(Drawable result) {
         if (result != null) {
             if (backAlbum.getDrawable() != null) {

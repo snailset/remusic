@@ -348,6 +348,8 @@ public class PlaylistActivity extends BaseActivity implements ObservableScrollVi
         @Override
         protected Void doInBackground(final Void... unused) {
             try {
+                // TODO: 2016/11/28 04
+                // 根据歌单id获取歌单歌曲列表
                 JsonObject jsonObject = HttpUtil.getResposeJsonObject(BMA.GeDan.geDanInfo(playlsitId + ""));
                 // GeDanSrcInfo geDanSrcInfo = MainApplication.gsonInstance().fromJson(jsonObject.toString(), GeDanSrcInfo.class);
                 JsonArray pArray = jsonObject.get("content").getAsJsonArray();
@@ -498,6 +500,12 @@ public class PlaylistActivity extends BaseActivity implements ObservableScrollVi
     }
 
 
+    /**
+     * todo 用这种方式实现headView的转变 很原始啊
+     * @param scrollY
+     * @param firstScroll
+     * @param dragging
+     */
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
 
@@ -702,7 +710,7 @@ public class PlaylistActivity extends BaseActivity implements ObservableScrollVi
                           list[i] = info.songId;
                           infos.put(list[i], info);
                       }
-                      if(getAdapterPosition() > 0)
+                      if(getAdapterPosition() > 0)  //// TODO: 2016/11/28  这里开始播放歌曲 
                           MusicPlayer.playAll(infos, list, getAdapterPosition() - 1, false);
                   }
               },70);

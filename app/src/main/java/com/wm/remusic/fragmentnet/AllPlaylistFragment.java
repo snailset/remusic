@@ -107,6 +107,7 @@ public class AllPlaylistFragment extends Fragment {
         @Override
         protected Object doInBackground(Object[] params) {
 
+            // TODO: 2016/11/28 02
             JsonObject result = HttpUtil.getResposeJsonObject(BMA.GeDan.geDan(next, 10));
             if (result == null) {
                 return null;

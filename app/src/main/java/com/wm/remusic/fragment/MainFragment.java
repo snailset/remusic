@@ -23,7 +23,6 @@ import com.wm.remusic.adapter.MainFragmentItem;
 import com.wm.remusic.info.Playlist;
 import com.wm.remusic.provider.DownFileStore;
 import com.wm.remusic.provider.PlaylistInfo;
-import com.wm.remusic.recent.SongLoader;
 import com.wm.remusic.recent.TopTracksLoader;
 import com.wm.remusic.uitl.IConstants;
 import com.wm.remusic.uitl.MusicUtils;
@@ -171,6 +170,9 @@ public class MainFragment extends BaseFragment {
 
     //刷新列表
     public void reloadAdapter() {
+        if (mAdapter == null) {  //todo  开始mAdapter没初始化的时候就调用了 蛋疼  这个方法为什么无缘无故被调用好几次
+            return;
+        }
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(final Void... unused) {

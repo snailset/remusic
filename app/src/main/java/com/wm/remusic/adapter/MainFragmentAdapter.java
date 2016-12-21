@@ -292,15 +292,15 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
             return -1;
         }
         if (itemResults.get(position) instanceof MainFragmentItem)
-            return 0;
+            return 0;  // 本地列表
         if (itemResults.get(position) instanceof Playlist) {
-            return 1;
+            return 1;  // 播放列表
         }
-        if (itemResults.get(position) instanceof String) {
+        if (itemResults.get(position) instanceof String) { // 收藏的歌单
             if (((String) itemResults.get(position)).equals("收藏的歌单"))
                 return 3;
         }
-        return 2;
+        return 2;  // 创建的歌单
     }
 
 

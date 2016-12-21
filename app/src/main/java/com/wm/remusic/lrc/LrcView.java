@@ -149,6 +149,10 @@ public class LrcView extends View implements ILrcView {
      * 控制文字缩放的因子
      **/
     private float mCurFraction = 0;
+
+    /**
+     * 移动最小触发距离
+     */
     private int mTouchSlop;
 
     private Bitmap arrowBitmap;
@@ -300,6 +304,7 @@ public class LrcView extends View implements ILrcView {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (!canDrag) {
+                    // 如果移动距离大于最小移动触发距离，并且方向是往上下拉的(与左右对比)
                     if (Math.abs(event.getRawY() - firstY) > mTouchSlop && Math.abs(event.getRawY() - firstY) > Math.abs(event.getRawX() - lastX)) {
                         canDrag = true;
                         mIsDrawTimeLine = true;
@@ -397,7 +402,8 @@ public class LrcView extends View implements ILrcView {
                         }
                         scrollTo(getScrollX(), (int) (mCurRow * (mCurSizeForOtherLrc + mCurPadding)));
                     } else {
-                        smoothScrollTo((int) (mCurRow * (mCurSizeForOtherLrc + mCurPadding)), DURATION_FOR_LRC_SCROLL);
+                        // TODO: 2016/12/8 这一行是我注释的，不需要在移动后回到原位
+//                        smoothScrollTo((int) (mCurRow * (mCurSizeForOtherLrc + mCurPadding)), DURATION_FOR_LRC_SCROLL);
                     }
                     //如果高亮歌词的宽度大于View的宽，就需要开启属性动画，让它水平滚动
                     float textWidth = mPaintForHighLightLrc.measureText(mLrcRows.get(mCurRow).getContent());

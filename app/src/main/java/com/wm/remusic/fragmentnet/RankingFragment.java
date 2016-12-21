@@ -90,6 +90,7 @@ public class RankingFragment extends Fragment {
         @Override
         protected Void doInBackground(Integer... params) {
 
+            // TODO: 2016/11/28 03 
             JsonArray array = null;
             try {
                 JsonObject jsonObject = HttpUtil.getResposeJsonObject(BMA.Billboard.billSongList(params[0], 0, 3));

@@ -52,8 +52,8 @@
                     android:layout_margin="3dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/play_disc_halo"
-                    app:layout_heightPercent="77%"
-                    app:layout_widthPercent="76%" />
+                    app:layout_heightPercent="70%"
+                    app:layout_widthPercent="69%" />
 
                 <!--<com.wm.remusic.widget.RoundImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
                 <!--android:layout_width="match_parent"-->
@@ -75,20 +75,20 @@
                     android:id="@+id/needle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="-16dp"
-                    android:rotation="-30"
                     android:src="@drawable/play_needle"
                     android:transformPivotX="15.1dp"
                     android:transformPivotY="15.1dp"
-                    app:layout_marginRightPercent="23%"
+                    android:layout_marginLeft="-10dp"
+                    app:layout_marginLeftPercent="48%"
 
                     />
             </android.support.percent.PercentRelativeLayout>
 
         </FrameLayout>
 
+        <!-- 歌词 -->
         <RelativeLayout
             android:id="@+id/lrcviewContainer"
             android:layout_marginTop="?attr/actionBarSize"

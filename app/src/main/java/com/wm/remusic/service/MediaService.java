@@ -866,6 +866,9 @@ public class MediaService extends Service {
         }
     }
 
+    /**
+     * 在线播放设置 播放的URl
+     */
     class GetPlayUrl implements Runnable {
         long id;
         boolean play;
@@ -880,6 +883,7 @@ public class MediaService extends Service {
 
             String url = PreferencesUtility.getInstance(MediaService.this).getPlayLink(id);
             if (url == null) {
+                // TODO: 2016/11/29 06 根据歌曲id获取歌曲下载信息 
                 MusicFileDownInfo song = Down.getUrl(MediaService.this, id + "");
                 if (song != null && song.getShow_link() != null) {
                     url = song.getShow_link();
@@ -887,6 +891,7 @@ public class MediaService extends Service {
                 }
             }
             Log.e(TAG, url);
+            // TODO: 2016/11/29 07 为当前player设置在线资源
             startProxy();
             // String urlEn = HttpUtil.urlEncode(url);
             String urlEn = url;
@@ -942,6 +947,7 @@ public class MediaService extends Service {
             File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + LRC_PATH + musicInfo.songId);
             String lrc = null;
             try {
+                // TODO: 2016/11/29 05 获取歌词
                 lrc = HttpUtil.getResposeString(url);
                 if (lrc != null && !lrc.isEmpty()) {
                     if(!file.exists())
@@ -1572,8 +1578,11 @@ public class MediaService extends Service {
             mPlaylist = mPlaybackStateStore.getQueue();
 
             try {
+                System.out.println("========================== goto");
+                // /data/data/com.wm.remusic/cacheplaylist
                 FileInputStream fo = new FileInputStream(new File(getCacheDir().getAbsolutePath() + "playlist"));
                 String c = readTextFromSDcard(fo);
+                System.out.println("+++++++++++++++ c = " + c);
                 HashMap<Long, MusicInfo> play = MainApplication.gsonInstance().fromJson(c, new TypeToken<HashMap<Long, MusicInfo>>() {
                 }.getType());
                 if (play != null && play.size() > 0) {
@@ -1582,8 +1591,10 @@ public class MediaService extends Service {
                 }
 
             } catch (FileNotFoundException e) {
+                System.out.println("+++++++++++++++++++++ FileNotFoundException");
                 e.printStackTrace();
             } catch (Exception e) {
+                System.out.println("+++++++++++++++++++++++++ Exception");
                 e.printStackTrace();
             }
         }

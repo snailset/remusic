@@ -29,7 +29,7 @@ public class AlbumViewPager extends ViewPager {
                 downPoint.y = evt.getY();
                 if (this.getChildCount() > 1) { //有内容，多于1个时
                     // 通知其父控件，现在进行的是本控件的操作，不允许拦截
-                    getParent().requestDisallowInterceptTouchEvent(true);
+//                    getParent().requestDisallowInterceptTouchEvent(true);
                 }
                 break;
             case MotionEvent.ACTION_UP:

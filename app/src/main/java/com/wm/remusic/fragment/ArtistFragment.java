@@ -25,7 +25,6 @@ import com.wm.remusic.lastfmapi.callbacks.ArtistInfoListener;
 import com.wm.remusic.lastfmapi.models.ArtistQuery;
 import com.wm.remusic.lastfmapi.models.LastfmArtist;
 import com.wm.remusic.service.MusicPlayer;
-import com.wm.remusic.uitl.AlbumComparator;
 import com.wm.remusic.uitl.ArtistComparator;
 import com.wm.remusic.uitl.IConstants;
 import com.wm.remusic.uitl.MusicUtils;
@@ -241,6 +240,7 @@ public class ArtistFragment extends BaseFragment {
                 @Override
                 public void artistInfoSucess(LastfmArtist artist) {
                     if (artist != null && artist.mArtwork != null) {
+                        System.out.println("======================== " + artist.mArtwork.get(2).mUrl);
                         ((ListItemViewHolder) holder).draweeView.setImageURI(Uri.parse(artist.mArtwork.get(2).mUrl));
 
                     } else {

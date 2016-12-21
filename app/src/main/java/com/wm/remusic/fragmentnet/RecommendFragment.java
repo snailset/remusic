@@ -133,6 +133,7 @@ public class RecommendFragment extends Fragment {
                     isFromCache = false;
                 }
 
+                // TODO: 2016/11/28 01
                 //推荐电台
                 try {
                     JsonObject list = HttpUtil.getResposeJsonObject("http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.8.1.0&channel=ppzs&operator=3&method=baidu.ting.plaza.index&cuid=89CF1E1A06826F9AB95A34DC0F6AAA14"
@@ -217,6 +218,7 @@ public class RecommendFragment extends Fragment {
                 isFromCache = false;
             }
 
+            // 获取
             //推荐电台
             try {
                 JsonObject list = HttpUtil.getResposeJsonObject("http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.8.1.0&channel=ppzs&operator=3&method=baidu.ting.plaza.index&cuid=89CF1E1A06826F9AB95A34DC0F6AAA14"

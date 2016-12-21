@@ -165,6 +165,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             BaseActivity baseActivity = mReference.get();
             if (baseActivity != null) {
                 if (action.equals(MediaService.META_CHANGED)) {
+                    System.out.println("============== BaseActivity META_CHANGED ==============");
                     baseActivity.updateTrackInfo();
 
                 } else if (action.equals(MediaService.PLAYSTATE_CHANGED)) {
